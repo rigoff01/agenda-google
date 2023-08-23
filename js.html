@@ -2,18 +2,23 @@
 
 function crearTablaContactos()
 {
+    //Crear Loader
+    crearLoader('divContactos');
     google.script.run.withSuccessHandler(crearTablaContactosCorrectamente)
     .withFailureHandler(crearTablaContactosError)
     .obtenerContactos();
+    
+    
 }
 
 function crearTablaContactosCorrectamente(obj)
 {
+    
     let tabla =  document.getElementById('tablaContactos');
     if (tabla) tabla.remove();
-
     tabla =  document.createElement('table');
     tabla.id = 'tablaContactos';
+    
     let tablaHeader =  document.createElement('thead');
     let tablaBody = document.createElement('tbody');
 
@@ -43,11 +48,14 @@ function crearTablaContactosCorrectamente(obj)
     tabla.appendChild(tablaBody);
     //agregamos clases a la tabla
     tabla.classList.add('table','table-striped', 'border', 'border-4', 'border-dark');
-
+    
     document.getElementById('divContactos').appendChild(tabla);
 
     //Mostrar notificacion de ok  carga a la tabla
     createNotificacionOk('Contactos obtenidos correctamente', 'Todo en orden');
+
+    //eliminar loader
+    eliminarLoader();
 }
 
 
@@ -55,6 +63,8 @@ function crearTablaContactosError()
 {
     //mostrar notificacion de Error
     createNotificacionError('No se han podido leer los contactos', 'Error');
+    //eliminar loader
+    eliminarLoader();
 }
 
 function crearNotificacion(mensaje, titulo)
@@ -111,5 +121,21 @@ function crearColorNotificacion(color)
     elementoNotificacion.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue(color);
 }
 
+function crearLoader(elementoPadre) 
+{
+    eliminarLoader();
+    let loader = document.createElement('div');
+    loader.id = 'loader';
+    loader.appendChild(document.createElement('div'));
+    loader.appendChild(document.createElement('div'));
+    loader.classList.add('ldio-iacdeow8sy');
+    document.getElementById(elementoPadre).appendChild(loader);    
+}
+
+function eliminarLoader()
+{
+    let loader = document.getElementById('loader');
+    if(loader) loader.remove();
+}
 
 </script>
