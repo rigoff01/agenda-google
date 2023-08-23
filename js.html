@@ -1,47 +1,50 @@
 <script>
-
 function crearTablaContactos()
-{
-    //Crear Loader
-    crearLoader('divContactos');
-    google.script.run.withSuccessHandler(crearTablaContactosCorrectamente)
+{      
+    //Eliminamos tabla si existe
+    eliminarTabla();
+
+     //Crear Loader
+     crearLoader('divContactos');   
+
+    google.script.run
+    .withSuccessHandler(crearTablaContactosCorrectamente)
     .withFailureHandler(crearTablaContactosError)
-    .obtenerContactos();
-    
-    
+    .obtenerContactos();       
 }
 
 function crearTablaContactosCorrectamente(obj)
-{
-    
-    let tabla =  document.getElementById('tablaContactos');
-    if (tabla) tabla.remove();
-    tabla =  document.createElement('table');
+{    
+    let tabla =  document.createElement('table');
     tabla.id = 'tablaContactos';
-    
+       
     let tablaHeader =  document.createElement('thead');
     let tablaBody = document.createElement('tbody');
 
-    Array.from(obj).forEach((filaActual,i) =>
+    //Header de la tabla
+    let primeraFila = document.createElement('tr');
+    for(let i = 0; i<obj[0].length; i++)
+    {
+        let celda = document.createElement('td');
+        celda.textContent = obj[0][i];
+        primeraFila.appendChild(celda);
+     }
+
+     //body de la tabla
+     tablaHeader.appendChild(primeraFila);
+     tabla.appendChild(tablaHeader);
+
+    for(let i = 1; i < obj.length; i++)
     {
         let fila = document.createElement('tr');
-        filaActual.forEach(celdaActual =>
+        for(let j = 0; j < obj[i].length; j++)
         {
             let celda = document.createElement('td');
-            celda.textContent = celdaActual;
+            celda.textContent = obj[i][j];
             fila.appendChild(celda);
-        });
-        if (i==0)
-        {
-            tablaHeader.appendChild(fila);
-            tabla.appendChild(tablaHeader);
         }
-        else
-        {
-            tablaBody.appendChild(fila);
-        }
-        
-    });
+        tablaBody.appendChild(fila);
+    }    
     //agregamos clases a la cabecera
     tablaHeader.classList.add('table-dark')
     //agregamos cuerpo a la tabla
@@ -136,6 +139,12 @@ function eliminarLoader()
 {
     let loader = document.getElementById('loader');
     if(loader) loader.remove();
+}
+
+function eliminarTabla()
+{
+  let tabla =  document.getElementById('tablaContactos');
+  if (tabla) tabla.remove();
 }
 
 </script>
