@@ -1,4 +1,48 @@
 <script>
+  function insertarContacto()
+{      
+  //Obtner Datos
+  let nombre = document.getElementById('nombre').value;
+  let correo = document.getElementById('correo').value;
+
+  // Eliminar tabla
+  eliminarTabla();
+
+  //Crear Loader
+  crearLoader('divContactos');   
+
+    google.script.run
+    .withSuccessHandler(contactoInsertadoCorrectamente)
+    .withFailureHandler(contactoinsertadoError)
+    .insertarContacto(nombre, correo);       
+}
+
+function contactoInsertadoCorrectamente()
+{
+  //Eliminamos los datos de los input
+  document.getElementById('nombre').value='';
+  document.getElementById('correo').value='';
+
+  //mostrar notificación
+  createNotificacionOk('Contacto insertado correctamente', 'CONTACTO OK');
+
+  //Eliminar loader
+  eliminarLoader();
+
+  //Mostramos la Tabla
+  crearTablaContactos();
+}
+
+function contactoinsertadoError()
+{
+  createNotificacionError('No se ha podido insertar el contacto', 'ERROR');
+  //Eliminar loader
+  eliminarLoader();
+
+  //Mostramos la Tabla
+  crearTablaContactos();
+}
+
 function crearTablaContactos()
 {      
     //Eliminamos tabla si existe
@@ -23,10 +67,10 @@ function crearTablaContactosCorrectamente(obj)
 
     //Header de la tabla
     let primeraFila = document.createElement('tr');
-    for(let i = 0; i<obj[0].length; i++)
+    for(const element of obj[0])
     {
         let celda = document.createElement('td');
-        celda.textContent = obj[0][i];
+        celda.textContent = element;
         primeraFila.appendChild(celda);
      }
 
@@ -37,10 +81,10 @@ function crearTablaContactosCorrectamente(obj)
     for(let i = 1; i < obj.length; i++)
     {
         let fila = document.createElement('tr');
-        for(let j = 0; j < obj[i].length; j++)
+        for(const element of obj[i])
         {
             let celda = document.createElement('td');
-            celda.textContent = obj[i][j];
+            celda.textContent = element;
             fila.appendChild(celda);
         }
         tablaBody.appendChild(fila);
