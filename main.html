@@ -4,10 +4,11 @@
     <div class="d-flex justify-content-center my-3">
         <!--Botones-->
         <button type="button" class="btn btn-primary m-2" onclick="crearTablaContactos()">Mostrar usuarios</button>
+        <button type="button" class="btn btn-primary m-2" onclick="abrirModalcrearContacto()">Crear Contacto</button>
          <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#crearContactoModal">
+       <!--  <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#crearContactoModal">
             Nuevo Contacto
-        </button>
+        </button> -->
 
     </div>
 
@@ -40,7 +41,7 @@
         <div class="modal-lg modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Contacto</h1>
+                    <h1 class="modal-title fs-5" id="tituloModal">Nuevo Contacto</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <!-- Formulario crear contacto -->
@@ -75,7 +76,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-success">Cear Contacto</button>
+                        <button id="botonCrearModificar" type="submit" class="btn btn-success">Cear Contacto</button>
                     </div>
                 </form>
             </div>
