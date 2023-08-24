@@ -26,3 +26,8 @@ function insertarContacto(nombre, canton, correo, telf)
 {
     HOJA.appendRow([nombre, canton, correo, telf]);
 }
+
+function borrarContacto(numFila)
+{
+    HOJA.deleteRow([numFila]);
+}
