@@ -3,7 +3,9 @@
 {      
   //Obtner Datos
   let nombre = document.getElementById('nombre').value;
+  let canton = document.getElementById('canton').value;
   let correo = document.getElementById('correo').value;
+  let telf = document.getElementById('telf').value;
 
   //Cerrar Modal
  bootstrap.Modal.getInstance(document.getElementById('crearContactoModal')).hide();
@@ -17,7 +19,7 @@
     google.script.run
     .withSuccessHandler(contactoInsertadoCorrectamente)
     .withFailureHandler(contactoinsertadoError)
-    .insertarContacto(nombre, correo);       
+    .insertarContacto(nombre, canton, correo, telf);       
 }
 
 function contactoInsertadoCorrectamente()
