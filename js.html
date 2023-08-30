@@ -12,6 +12,15 @@
     }
   });
 
+
+//Cargar imagen
+document.getElementById("imagen").addEventListener("change", function()
+{
+  document.getElementById("imgForm").src = URL.createObjectURL(this.files[0])
+
+});
+
+
 function subirArriba()
 {
   document.body.scrollTop = 0;
@@ -28,20 +37,57 @@ function limpiar()
   function insertarContacto()
 {      
   limpiar();
-  
-  //Obtner Datos
-  let nombre = document.getElementById('nombre').value;
-  let canton = document.getElementById('canton').value;
-  let correo = document.getElementById('correo').value;
-  let telf = document.getElementById('telf').value;
+  bootstrap.Modal.getInstance(document.getElementById('crearContactoModal')).hide();
 
-  //Cerrar Modal
- bootstrap.Modal.getInstance(document.getElementById('crearContactoModal')).hide();
+  let contacto =guardarDatosContacto();
+  let archivo =document.getElementById('imagen').files[0];
+
+  if(archivo) subirImagen(contacto,imagen);
+  else
+  {
     google.script.run
     .withSuccessHandler(contactoInsertadoCorrectamente)
     .withFailureHandler(contactoinsertadoError)
-    .insertarContacto(nombre, canton, correo, telf);       
+    .insertarContacto(contacto); 
+  }          
 }
+
+function guardarDatosContacto() 
+{
+    let contacto = 
+  {
+    nombre: document.getElementById('nombre').value,
+    canton: document.getElementById('canton').value,
+    correo: document.getElementById('correo').value,
+    telf: document.getElementById('telf').value,
+    imagen: document.getElementById('imgForm').src
+  };
+  return contacto;
+
+}
+
+function subirImagen(contacto,archivo) 
+{
+  let fr = new FileReader(); // sin argumentos
+  fr.readAsArrayBuffer(archivo);
+
+  fr.onload = function() 
+  {
+    let imagen =
+    {
+      nombre: archivo.name,
+      tipo: archivo.type,
+      datos: Array.from(new Int8Array(this.result))
+    };
+    
+    google.script.run
+    .withSuccessHandler(contactoInsertadoCorrectamente)
+    .withFailureHandler(contactoinsertadoError)
+    .insertarContacto(contacto, imagen); 
+  } 
+
+}
+
 
 function contactoInsertadoCorrectamente()
 {

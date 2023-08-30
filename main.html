@@ -11,8 +11,8 @@
     </div>
 
 
-    <!--Tabla contactos-->
-    <div class="container col-12 col-lg-10 d-flex justify-content-center" id="divContactos"></div>
+    <!--Contactos-->
+    <div class="container col-12 d-flex justify-content-center" id="divContactos"></div>
 
     <!--Notificaciones-->
     <div class="div-notificaciones position-fixed bottom-0 end-0 p-3" >
@@ -34,33 +34,43 @@
                 </div>
                 <!-- Formulario crear contacto -->
                 <form onsubmit="insertarContacto()" method="dialog" id="formulario">
-                    <div class="modal-body">
-                        <!--Nombres Funcionario-->
+                    <div class="modal-body">                       
                         <div class="row mb-3">
-                            <div class="col-8">
-                                <label for="nombre" class="form-label">Introduce el nombre del Funcionario</label>
-                                <input type="text" class="form-control" name="nombre" id="nombre" pattern="[\D]*" title="El nombre no puede contener números" required>
+                              <!--Parte izquierda-->
+                            <div class="col-6 d-flex flex-column">
+                                <!--Nombres-->
+                                <div class="mb-2">
+                                    <label for="nombre" class="form-label">Introduce el nombre del Funcionario</label>
+                                    <input type="text" class="form-control" name="nombre" id="nombre" pattern="[\D]*" title="El nombre no puede contener números" required>
+                                </div>
+                                <!--Canton-->
+                                <div class="mb-2">
+                                    <label for="canton" class="form-label">Introduce el cantón</label>
+                                    <input type="text" class="form-control" name="canton" id="canton" required>
+                                </div>
+                                <!--Correo-->
+                                <div class="input-group mb-2">
+                                    <span class="input-group-text"><i class="bi bi-envelope-fill">Correo</i></span>
+                                    <input type="email" class="form-control" name="correo" id="correo" required>  
+                                </div>
+                                <!--Telefono-->
+                                <div class="input-group mb-2">
+                                    <span class="input-group-text"><i class="bi bi-telephone-fill">Teléfono</i></span>
+                                    <input type="tel" class="form-control" name="telf" id="telf" pattern="[\d]{5,5}" title="La extensión debe contener cinco números" required>
+                                </div>
+                                <!--Archivo-->
+                                <div class="mb-2">
+                                    <label for="imagen" class="form-label">Selecciona una imagen para el contacto</label> 
+                                    <input type="file"accept="imagen/*" class="form-control" name="imagen" id="imagen">
+                                </div>
                             </div>
-                            <div class="col-4">
-                                <label for="canton" class="form-label">Introduce el cantón</label>
-                                <input type="text" class="form-control" name="canton" id="canton" required>
-                            </div>
+                             
+                            <!--Parte derecha-->
+                            <div class="col-6 d-flex justify-content-center align-items-center p-0">
+                                <img class="img-fluid img-form" id="imgForm" alt="Imagen de contacto">
+                            </div>                            
+                           
                         </div>
-                         <!--Cargo y teléfono-->
-                        <div class="row input group mb-3">
-                            <div class="col-6">
-                                <!--<label for="correo" class="form-label">Introduce el correo del contacto</label>-->
-                                <span class="input-group-text"><i class="bi bi-envelope-fill">Correo</i></span>
-                                <input type="email" class="form-control me-4" name="correo" id="correo" required>
-                            </div>
-                            <div class="col-6">
-                                <!--<label for="correo" class="form-label">Introduce la extensión</label>-->
-                                <span class="input-group-text"><i class="bi bi-telephone-fill">Teléfono</i></span>
-                                <input type="tel" class="form-control" name="telf" id="telf" pattern="[\d]{5,5}" title="La extensión debe contener cinco números" required>
-                            </div>
-                        </div>
-
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

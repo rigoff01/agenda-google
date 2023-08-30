@@ -3,7 +3,7 @@
     function extraerContactos(datos)
     {
         let contactos = [];
-        for (let i = 0; i < datos.length; i++)
+        for (let i = 1; i < datos.length; i++)
         {
             let contacto = 
             {
@@ -14,8 +14,7 @@
                 imagen: datos[i] [4],
                 fila: i+1
             };
-            contactos.push(contacto);           
-
+            contactos.push(contacto);
         }
         return contactos;
     }
@@ -23,9 +22,9 @@
     function extraerColumnas(datos)
     {
         let columnas = [];
-        for (let i = 0; i < datos[0].length; i++)
+        for (const element of datos[0])
         {
-            columnas.push(datos[0][i]);
+            columnas.push(element);
         }
         columnas.push('OPCIONES');
         return columnas;
@@ -98,7 +97,6 @@
          contactos.forEach(contacto => 
          {
             let fila = document.createElement('tr');
-
             //agregamos las celdas
             fila.appendChild(crearCelda(contacto.nombre));
             fila.appendChild(crearCelda(contacto.canton));
@@ -106,7 +104,6 @@
             fila.appendChild(crearCelda(contacto.telf));
             fila.appendChild(crearCeldaImagen(contacto.imagen));
             fila.appendChild(crearCeldaBotones(contacto));
-
 
             //agregamos la fila
             tablaBody.appendChild(fila);
@@ -126,7 +123,7 @@
     {
         let celda = document.createElement("td");
         let imagen = document.createElement("img");
-        imagen.classList.add('img-fluid','rounded');
+        imagen.classList.add('img-fluid','rounded','img-tabla');
         imagen.src = rutaImagen;
         celda.appendChild(imagen);
 
@@ -144,9 +141,6 @@
         celda.appendChild(crearModificarContacto(contacto));
         return celda;
     }
-
-
-
 
     function crearTablaContactosError()
     {
