@@ -1,5 +1,23 @@
 <script>
-//boton subir
+  //
+//NOTIFICACIONES
+//
+const ICONO_CHECK = 'bi-check2-square';
+const ICONO_PAPELERA = 'bi-trash';
+const ICONO_CONTACTO = 'bi-person-plus-fill';
+const ICONO_ERROR = 'bi-bug';
+const ICONO_ADVERTENCIA = 'bi-exclamation-square';
+
+const LOTTIE_CHECK = 'https://lottie.host/aa257a36-1555-4e9a-ae9b-d969f5ab7658/Sx8iNbtuDs.json';
+const LOTTIE_PAPELERA = 'https://lottie.host/252a1d0e-a43e-43b2-a0fa-950c542fe38d/jLumXPSnbc.json';
+const LOTTIE_CONTACTO = 'https://lottie.host/00a63186-7603-4c0f-b425-a0f2771d931a/hSOgRp12Gu.json';
+const LOTTIE_ERROR = 'https://lottie.host/824a9cbe-974f-4892-966d-86876595298a/70UKWLNfCI.json';
+const LOTTIE_ADVERTENCIA = 'https://lottie.host/df2c3fee-176d-4626-8a94-111474e1dfa9/DQRjwU7uNx.json';
+const LOTTIE_LOADER_NUBE = 'https://lottie.host/df0f78ab-52af-4657-805b-582acdf44e47/WVlMeycUIC.json'
+
+
+
+  //boton subir
   window.addEventListener("scroll", function() 
   {
     if(this.window.scrollY > 500)
@@ -20,6 +38,40 @@ document.getElementById("imagen").addEventListener("change", function()
 
 });
 
+//dragover
+document.getElementById('imgForm').addEventListener('dragover', function(event)
+{
+  event.preventDefault();
+  this.style.filter = 'opacity(0%)';
+  document.getElementById('cajaIconoForm').style.display = 'flex';
+});
+
+//dragleave
+document.getElementById('imgForm').addEventListener('dragleave', function(event)
+{
+  this.style.filter = 'opacity(100%)';
+  document.getElementById('cajaIconoForm').style.display = 'none';
+});
+
+
+//drop
+document.getElementById('imgForm').addEventListener('drop', function(event)
+{
+  event.preventDefault();
+  let ficheros = event.dataTransfer.files;
+
+  //pasamos los archivos al input
+  document.getElementById('imagen').files = ficheros;
+
+  //creamos una url para mostrar la imagen
+  document.getElementById("imgForm").src = URL.createObjectURL(ficheros[0]);
+  //Mostramos la imagen y quitamos zona de carga
+  this.style.filter = 'opacity(100%)';
+  document.getElementById('cajaIconoForm').style.display = 'none';
+});
+
+
+
 
 function subirArriba()
 {
@@ -31,7 +83,8 @@ function limpiar()
 {
   eliminarTabla();
   eliminarTarjeta();
-  crearLoader('divContactos');
+  //crearLoader('divContactos');
+  crearLoaderLottie('divContactos', LOTTIE_LOADER_NUBE);
 }
 
   function insertarContacto()
@@ -109,7 +162,6 @@ function subirImagenModificar(contacto,archivo)
   } 
 
 }
-
 
 function contactoInsertadoCorrectamente()
 {

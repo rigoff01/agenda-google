@@ -19,24 +19,21 @@ function crearTarjetasError()
 
 function crearTarjetasCorrectamente(datos) 
 {
-    //extraer contactos
-    let contactos = extraerContactos(datos);
-    
-        let tarjetas = document.createElement('div');
+   //eliminar loader
+   eliminarLoader();  
+  //extraer contactos
+    let contactos = extraerContactos(datos);    
+    let tarjetas = document.createElement('div');
     tarjetas.id = 'tarjetasContactos';
     tarjetas.classList.add('container');
 
     //por cada contacto, agregamos una tarjeta 
     contactos.forEach(contacto => tarjetas.appendChild(crearContactoTarjeta(contacto)));
-
-
-
   
   //agregar tarjetas
   document.getElementById('divContactos').appendChild(tarjetas);
 
-  //eliminar loader
-  eliminarLoader();
+ 
 }
 
 function crearContactoTarjeta(contacto)
@@ -113,16 +110,26 @@ function crearBotonesTarjeta(contacto)
 function crearImagenTarjeta(contacto)
 {
   let imagenTarjeta = document.createElement('div');
-  imagenTarjeta.classList.add('col-6','rounded','d-flex','justyfy-content-end');
+  imagenTarjeta.classList.add('col-6','rounded','d-flex','justify-content-end');
   let cajaImagenTarjeta = document.createElement('div');
-  cajaImagenTarjeta.classList.add('box','border','border-3','border-dark','rouded');
+  cajaImagenTarjeta.classList.add('box','rouded', 'd-flex', 'justify-content-center', 'align-items-center','img-contacto');
   let imagen = document.createElement('img');
-  imagen.classList.add('img-fluid','rounded','img-contacto');
+  imagen.classList.add('img-fluid','rounded','img-contacto','border','border-3','border-dark');
   imagen.src = contacto.imagen;
+  imagen.style.display = 'none';
 
   //agregamos imagen a la caja y tarjeta
   cajaImagenTarjeta.appendChild(imagen);
   imagenTarjeta.appendChild(cajaImagenTarjeta);
+
+  //Crear icono de carga
+  let loader = crearLoaderImagen(cajaImagenTarjeta);
+  //evento al finalizar la carga 
+  imagen.onload = () => 
+  {
+    loader.remove();
+    imagen.style.display = 'inline';
+  }
 
   return imagenTarjeta;
 }
