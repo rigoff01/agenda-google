@@ -65,7 +65,17 @@ function crearDatosTarjeta(contacto)
   datosTarjeta.classList.add('col-6','d-flex','flex-column','align-items-start');
   //nombre
   let nombre = document.createElement("h3");
-  nombre.textContent = contacto.nombre+''+contacto.canton;
+  nombre.textContent = contacto.nombre;
+
+  //canton
+  let canton = document.createElement("div");
+  canton.classList.add('d-flex');
+  let iconoCanton = document.createElement("i");
+  iconoCanton.classList.add('bi','bi-building-fill-add','me-2');
+  let tituloCanton = document.createElement("h5");
+  tituloCanton.textContent = contacto.canton;
+  canton.appendChild(iconoCanton);
+  canton.appendChild(tituloCanton);
 
   //correo
   let correo = document.createElement("div");
@@ -89,6 +99,7 @@ function crearDatosTarjeta(contacto)
 
   //agregamos datos
   datosTarjeta.appendChild(nombre);
+  datosTarjeta.appendChild(canton);
   datosTarjeta.appendChild(correo);
   datosTarjeta.appendChild(telf);
   return datosTarjeta;
