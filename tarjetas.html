@@ -31,9 +31,7 @@ function crearTarjetasCorrectamente(datos)
     contactos.forEach(contacto => tarjetas.appendChild(crearContactoTarjeta(contacto)));
   
   //agregar tarjetas
-  document.getElementById('divContactos').appendChild(tarjetas);
-
- 
+  document.getElementById('divContactos').appendChild(tarjetas); 
 }
 
 function crearContactoTarjeta(contacto)
@@ -108,7 +106,6 @@ function crearDatosTarjeta(contacto)
 
 function crearBotonesTarjeta(contacto)
 {
-
   let divBotones = document.createElement('div');
   divBotones.classList.add('d-flex','justify-content-start','mt-auto');
 

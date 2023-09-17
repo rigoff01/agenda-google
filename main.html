@@ -3,7 +3,7 @@
     <!--Botones superiores-->
     <div class="d-flex justify-content-center my-3">
         <!--Botones-->
-        <button type="button" class="btn btn-success m-2" onclick="crearTarjetasContactos()"><i
+        <button type="button" class="btn btn-success m-2" onclick="crearTarjetasCuadradas()"><i
                 class="bi- bi-postcard"></i></button>
         <button type="button" class="btn btn-success m-2" onclick="crearTablaContactos()"><i
                 class="bi- bi-table"></i></button>
@@ -25,8 +25,7 @@
     </div>
 
 
-
-    <!-- Modal -->
+    <!-- Modal Crear Modificar contacto-->
     <div class="modal fade" id="crearContactoModal" tabindex="-1" aria-labelledby="tituloCrearContactoModal"
         aria-hidden="true">
         <div class="modal-lg modal-dialog">
@@ -95,5 +94,74 @@
             </div>
         </div>
     </div>
+
+    <!--Modal Info Contacto-->
+    <div class="modal fade" id="infoContactoModal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center align-items-center flex-column">
+                        <!--Parte superior-->
+                        <div class="m-3">
+                            <h3 class="text-uppercase text-center fw-bold mb-2" id="nombreInfoContacto"></h3>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-envelope-fill me-2"></i>
+                                <h5 class="me-4" id="correoInfoContacto"></h5>
+                                <i id="copiarCorreo" class="bi bi-clipboard boton-copiar" data-bs-toggle="tooltip"
+                                    data-bs-placement="right" title="Copiar Correo"></i>
+                            </div>
+
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-telephone-fill me-2"></i>
+                                <h5 class="me-4" id="telfInfoContacto"></h5>
+                                <i id="copiarTelf" class="bi bi-clipboard boton-copiar" data-bs-toggle="tooltip"
+                                    data-bs-placement="right" title="Copiar Teléfono"></i>
+                            </div>
+                        </div>
+
+                        <!--Parte inferior-->
+                        <div class="m-3">
+                            <img id="imgInfoContacto" class="border border-4 border-dark rounded"
+                                alt="Vista previa de la imagen del contacto">
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--Plantilla contacto 1-->
+    <template id="plantillaContacto">
+
+        <div id="plantillaLoader" class="my-5 mx-2 plantilla-loader">
+            <p>Cargando Imagen...</p>
+            <div class="ldio-iacdeow8sy"><div></div><div></div><div></div><div></div></div>
+
+        </div>
+
+
+        <div id="plantillaNumero" class="my-5 mx-2">
+            <div class="caja-contacto">
+                <img id="plantillaImagen" alt="Imagen del Contacto">
+                <div class="datos-contacto">
+                    <h3 id="plantillaNombre"></h3>
+                    <span>
+                        <a id="plantillaInfo" class="boton-caja btn btn-success"><i class="bi bi-plus-square"></i></a>
+                        <a id="plantillaEditar" class="boton-caja btn btn-warning"><i class="bi bi-pencil-square"></i></a>
+                        <a id="plantillaBorrar" class="boton-caja btn btn-danger"><i class="bi bi-trash"></i></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </template>
+
+
 
 </main>
