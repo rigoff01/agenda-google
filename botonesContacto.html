@@ -4,7 +4,7 @@
         //Boton info
         let botonInfo = document.createElement('button');
         botonInfo.id = 'botonInfo'+contacto.fila;
-        botonInfo.classList.add('btn','btn-success','m1');
+        botonInfo.classList.add('btn','btn-success','m-1');
         botonInfo.onclick = () => abrirModalInfoContacto(contacto);
 
         //icono
@@ -19,7 +19,7 @@
         //Boton Borrar
         let botonDanger = document.createElement('button');
         botonDanger.id = 'botonDanger'+contacto.fila;
-        botonDanger.classList.add('btn','btn-danger','m1');
+        botonDanger.classList.add('btn','btn-danger','m-1');
         botonDanger.onclick = () => borrarContacto(contacto.fila);
 
         //icono
@@ -34,7 +34,7 @@
         //Boton modificar
         let botonModificar = document.createElement('button');
         botonModificar.id = 'botonModificar'+contacto.fila;
-        botonModificar.classList.add('btn','btn-warning','m1');
+        botonModificar.classList.add('btn','btn-warning','m-1');
         botonModificar.onclick = () => abrirModalModificarContacto(contacto);
 
         //icono
