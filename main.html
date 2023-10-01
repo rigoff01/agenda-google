@@ -9,7 +9,7 @@
                 class="bi- bi-table"></i></button> -->
 
 
-        <button type="button" class="btn btn-primary m-2" onclick="abrirModalcrearContacto()"><i
+        <button id="insertarContacto" type="button" class="btn btn-primary m-2"><i
                 class="bi- bi-person-plus"></i>Crear Contacto</button>
         
         <div class="dropdown">
@@ -17,8 +17,6 @@
              <i class="bi bi-gear fs-5"></i>
             </button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="desplegableEstilos">
-                <li><a class="dropdown-item" id="tarjetasEstiloTabla">Estilo Tabla</a></li>
-                <li><a class="dropdown-item" id="tarjetasEstiloFila">Estilo Fila</a></li>
                 <li><a class="dropdown-item" id="tarjetasEstilo1">Estilo Tarjeta 1</a></li>
                 <li><a class="dropdown-item" id="tarjetasEstilo2">Estilo Tarjeta 2</a></li>
                 <li><a class="dropdown-item" id="tarjetasEstilo3">Estilo Tarjeta 3</a></li>
@@ -51,7 +49,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <!-- Formulario crear contacto -->
-                <form onsubmit="insertarContacto()" method="dialog" id="formulario">
+                <form method="dialog" id="formulario">
                     <div class="modal-body">
                         <div class="mb-3 d-flex justify-content-center align-items-center flex-wrap">
                             <!--Parte izquierda-->
@@ -89,11 +87,11 @@
                             <!--Parte derecha-->
                             <div class="div-img-form">
                                 <i class="icono-form bi bi-question-circle-fill btn" data-bs-toggle="popover"
-                                    data-bs-content="Se recomiendan imágenes cuadradas para mejor visualización. Resolución recomendada 320X320"
+                                    data-bs-content="Se recomiendan imágenes cuadradas para mejor visualización. Resolución recomendada 220X220"
                                     data-bs-trigger="hover"></i>
                                 <img class="img-fluid img-form" id="imgForm" alt="Imagen de contacto">
                                 <!-- <div class="caja-icono-form container-fluid" id="cajaIconoForm"> -->
-                                <div class="lottie-form" id="lottieForm">
+                                <div class="lottie-form justify-content-center align-items-center" id="lottieForm" >
                                     <lottie-player
                                         src="https://lottie.host/a0174711-6412-4a09-b32b-7bb7b03f8995/kfclCKrrNa.json"
                                         speed="1" loop autoplay></lottie-player>
@@ -119,7 +117,8 @@
                     <div class="d-flex justify-content-center align-items-center flex-column">
                         <!--Parte superior-->
                         <div class="m-3">
-                            <h3 class="text-uppercase text-center fw-bold mb-2" id="nombreInfoContacto"></h3>
+                            <h5 class="text-uppercase text-center fw-bold mb-2" id="nombreInfoContacto"></h5>
+                            <h6 class="text-uppercase text-center fw-bold mb-2" id="cantonInfoContacto"></h6>
                             <div class="d-flex align-items-center">
                                 <i class="bi bi-envelope-fill me-2"></i>
                                 <h5 class="me-4" id="correoInfoContacto"></h5>
@@ -136,7 +135,7 @@
                         </div>
 
                         <!--Parte inferior-->
-                        <div class="m-3">
+                        <div class="m-6">
                             <img id="imgInfoContacto" class="img-info-contacto"
                                 alt="Vista previa de la imagen del contacto">
 
@@ -144,16 +143,13 @@
 
                     </div>
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 </div>
 
             </div>
         </div>
-    </div>
-
-    
+    </div>    
 
 
 </main>

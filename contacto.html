@@ -1,6 +1,22 @@
 <script>
     class Contacto
     {
+        //Ids de las plantillas
+        static get ESTILO_1() {return 'plantillaContacto1';}
+        static get ESTILO_2() {return 'plantillaContacto2';}
+        static get ESTILO_3() {return 'plantillaContacto3';}
+        static get ESTILO_4() {return 'plantillaContacto4';}
+        static get ESTILO_5() {return 'plantillaContacto5';}	
+        
+        static estiloActual = Contacto.ESTILO_4;
+
+        static aplicarEstilo(estilo)
+        {
+            Contacto.estiloActual = estilo;
+            crearTarjetas();
+        }
+
+
         constructor(nombre, canton, correo, telf, imagen, fila)
         {
             this.nombre = nombre;
@@ -10,5 +26,115 @@
             this.imagen = imagen;
             this.fila = fila;
         }
+        
+        static guardarDatosContacto(fila) 
+        {
+            return new Contacto(
+                document.getElementById('nombre').value,
+                document.getElementById('canton').value,
+                document.getElementById('correo').value,
+                document.getElementById('telf').value,
+                document.getElementById('imgForm').src,
+                fila
+            );
+        }
+
+        obtenerTarjeta()
+        {
+            let plantilla = document.getElementById(Contacto.estiloActual);
+            let copia = document.importNode(plantilla.content, true );
+
+            copia.getElementById('plantillaNumero').id = 'tarjeta'+this.fila;
+            copia.getElementById('plantillaNombre').textContent = this.nombre;
+            copia.getElementById('plantillaImagen').src = this.imagen;
+
+            //Botones
+            copia.getElementById('plantillaInfo').onclick = () => this.abrirInfo();
+            copia.getElementById('plantillaEditar').onclick = () => this.modificar();
+            copia.getElementById('plantillaBorrar').onclick = () => borrarContacto(this.fila);
+
+            let loader = copia.getElementById('plantillaLoader');
+            let tarjeta = copia.getElementById('tarjeta'+this.fila);
+
+            tarjeta.style.display = 'none';
+
+            //Evento finalizacion carga de la imagen
+            copia.getElementById('plantillaImagen').onload = () =>
+            {
+                loader.remove();
+                tarjeta.style.display = 'inline';
+            }
+
+            return copia;
+        }
+
+        static nuevo()
+        {
+            const IMAGEN_PERFIL_INICIO = 'https://drive.google.com/uc?export=view&id=1Fed6zsGVOLEYC05sZdt2cKYfZElZFeAD';
+            //Boton crear
+            let boton = document.getElementById('botonCrearModificar');
+            boton.textContent = 'Crear Contacto';
+            boton.classList = '';
+            boton.classList.add('btn', 'btn-success');
+
+            //Cambiar titulo del Modal
+            document.getElementById('tituloModal').textContent = 'Crear Contacto';
+
+            //Modificar submit
+            document.getElementById('formulario').onsubmit = () => insertarContacto();
+
+            //Obtner datos
+            document.getElementById('nombre').value = '';
+            document.getElementById('canton').value = '';
+            document.getElementById('correo').value = '';
+            document.getElementById('telf').value = '';
+            document.getElementById('imagen').value = '';
+            document.getElementById('imgForm').src = IMAGEN_PERFIL_INICIO;
+
+            //Abrir Modal
+            bootstrap.Modal.getOrCreateInstance(document.getElementById('crearContactoModal')).show();  
+        }
+
+        modificar()
+        {
+            //Boton Modificar
+            let boton = document.getElementById('botonCrearModificar');
+            boton.textContent = 'Modificar contacto';
+            boton.classList = '';
+            boton.classList.add('btn', 'btn-warning');
+
+            //Cambiar titulo del Modal
+            document.getElementById('tituloModal').textContent = 'Modificar contacto';
+
+            //Modificar submit
+            document.getElementById('formulario').onsubmit = () => modificarContacto(this.fila);
+
+            //Obtner datos
+            document.getElementById('nombre').value = this.nombre;
+            document.getElementById('canton').value = this.canton;
+            document.getElementById('correo').value = this.correo;
+            document.getElementById('telf').value = this.telf;
+            document.getElementById('imgForm').src = this.imagen;
+            document.getElementById('imagen').value = '';
+
+            //Abrir Modal
+            bootstrap.Modal.getOrCreateInstance(document.getElementById('crearContactoModal')).show();
+        }
+
+
+        abrirInfo()
+        {
+            //Obtner datos
+            document.getElementById('nombreInfoContacto').textContent = this.nombre;
+            document.getElementById('cantonInfoContacto').textContent = 'Cantón: '+this.canton;
+            document.getElementById('correoInfoContacto').textContent = this.correo;
+            document.getElementById('telfInfoContacto').textContent = this.telf;
+            document.getElementById('imgInfoContacto').src = this.imagen;
+            //Abrir Modal
+            bootstrap.Modal.getOrCreateInstance(document.getElementById('infoContactoModal')).show();        
+        }
+
+
     }
+    
 </script>
